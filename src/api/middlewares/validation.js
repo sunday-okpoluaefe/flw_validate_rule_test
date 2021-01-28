@@ -13,6 +13,13 @@ const { SetErrorData} = require('../providers/helpers');
  */
 module.exports.validate_rule = async (req, res, next) => {
 
+    const { rule , data } = req.body
+    if(!data.hasOwnProperty( rule.field ))
+        return req.respond.badRequest({
+            message: `field ${rule.field} is missing from data.`,
+            "status": "error",
+            "data": null
+        })
 
     next();
 }
@@ -33,10 +40,11 @@ module.exports.validate_request = (req, res, next) => {
  * Validate request schema
  */
 validate_schema_request = (schema, req, res, next) => {
+
     const { error, value } = validation.validate(schema, req.body);
 
     if(error) {
-        req.respond.badRequest(validation.parseError(error));
+        req.respond.badRequest(validation.parse_error_single(error));
         return error;
     }
     else req.body = value;

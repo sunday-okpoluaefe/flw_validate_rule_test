@@ -14,7 +14,7 @@ const logger = winston.createLogger({
         //winston.format.splat(),
         winston.format.json()
     ),
-    defaultMeta: { service: 'Along' },
+    defaultMeta: { service: 'Rule-Validation' },
     transports: [
         //
         // - Write to all logs with level `info` and below to `combined.log`.

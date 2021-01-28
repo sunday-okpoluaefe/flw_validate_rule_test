@@ -19,7 +19,7 @@ module.exports.validate = (schema, data) => {
  * @param {Object} error
  * @returns {Object}
  */
-module.exports.parseError = (error) => {
+module.exports.parse_error = (error) => {
     return {
         //original: error._original,
         errors: _.map(error.details, ({message, context}) => ({
@@ -27,4 +27,20 @@ module.exports.parseError = (error) => {
             key: context.key
         }))
     }
+}
+
+/**
+ * Parse Joi error object
+ * @param {Object} error
+ * @returns {Object}
+ */
+module.exports.parse_error_single = (error) => {
+
+   const errors = _.map(error.details, ({message, context}) => ({
+        message: message.replace(/['"]/g, ''),
+        status: 'error',
+        data: null
+    }))
+
+    return errors[0]
 }

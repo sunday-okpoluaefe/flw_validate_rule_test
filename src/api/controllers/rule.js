@@ -19,6 +19,9 @@ controller.get = async ( req, res, next) => {
 
 controller.validate = async ( req, res, next) => {
 
+
+
+    return req.respond.ok(req.body)
 }
 
 module.exports.RuleController = controller

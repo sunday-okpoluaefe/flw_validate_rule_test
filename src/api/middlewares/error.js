@@ -6,9 +6,13 @@ const { logger } = require('../../config/logger');
 const error =  {}
 
 error.catch = (err, req, res, next) => {
-    console.log("Caught error");
+
     if(err.statusCode && err.statusCode === 400)
-        return req.respond.badRequest(err.message);
+        return req.respond.badRequest({
+            message: "Invalid JSON payload passed.",
+            status: "error",
+            data: null
+        });
 
     logger.error(err.message, err);
     req.respond.internalError()
