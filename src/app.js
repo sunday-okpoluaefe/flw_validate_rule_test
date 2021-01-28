@@ -27,3 +27,6 @@ app.use(middlewares.error.notFound); //attach error middleware to catch 404 erro
 http.listen(port, ()=> {
     console.log(`App started. listening at port: ${port}`);
 });
+
+
+module.exports = app;

@@ -14,12 +14,13 @@ const { SetErrorData} = require('../providers/helpers');
 module.exports.validate_rule = async (req, res, next) => {
 
     const { rule , data } = req.body
-    if(!data.hasOwnProperty( rule.field ))
-        return req.respond.badRequest({
-            message: `field ${rule.field} is missing from data.`,
-            "status": "error",
-            "data": null
-        })
+    const value = _.get(data, rule.field)
+
+    if(value === undefined) return req.respond.badRequest({
+        message: `field ${rule.field} is missing from data.`,
+        "status": "error",
+        "data": null
+    })
 
     next();
 }
