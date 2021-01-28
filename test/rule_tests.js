@@ -83,8 +83,8 @@ describe('-------- Input Validation -------', ()=> {
 describe('-------- Rule Validation -------', ()=> {
 
     /*
-* Test for field types  --- rule **
-*/
+    * Test for failed validation --- **
+    */
     describe('POST /validate-rule', ()=>{
         it('should return with a response (HTTP 400 status code) for failed validation', (done)=> {
             chai.request(server)
@@ -104,6 +104,9 @@ describe('-------- Rule Validation -------', ()=> {
         })
     })
 
+    /*
+   * Test for successful validation  --- **
+   */
     describe('POST /validate-rule', ()=>{
         it('should return with a response (HTTP 200 status code) for successful validation', (done)=> {
             chai.request(server)
