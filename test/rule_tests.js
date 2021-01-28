@@ -90,17 +90,12 @@ describe('-------- Rule Validation -------', ()=> {
             chai.request(server)
                 .post("/validate-rule")
                 .send({
-                    message: "field missions successfully validated.",
-                    status: "success",
-                    data: {
-                        validation: {
-                            error: false,
-                            field: "missions",
-                            field_value: 30,
-                            condition: "gte",
-                            condition_value: 30
-                        }
-                    }
+                    rule: {
+                        field: "5",
+                        condition: "contains",
+                        condition_value: "rocinante"
+                    },
+                    data: ["The Nauvoo", "The Razorback", "The Roci", "Tycho"]
                 })
                 .end((error, response)=> {
                     response.should.have.status(400)
