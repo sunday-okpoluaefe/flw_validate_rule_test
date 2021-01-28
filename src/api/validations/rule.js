@@ -11,9 +11,11 @@ module.exports = {
             condition: Joi.string().required(),
             condition_value: Joi.any().required(),
         }).required().messages({
-            'object.base': `"rule" should be an 'object.'`,
+            'object.base': `"rule" should be an object.'`,
             'any.required': `"rule" is required.`
         }),
-        data: Joi.any().required()
+        data: Joi.any().required().messages({
+            'any.required': `"data" is required.`
+        }),
     })
 }
