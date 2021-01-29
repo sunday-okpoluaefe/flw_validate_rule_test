@@ -44,7 +44,7 @@ controller.validate = async ( req, res, next) => {
     const value = _.get(data, rule.field)
     const result = (controller.apply_rule(rule, value))
 
-    return req.respond.ok({
+    const response = {
         message: result ? `field ${rule.field} successfully validated.` : `field ${rule.field} failed validation.`,
         status: result ? "success" : "error",
         data: {
@@ -56,7 +56,9 @@ controller.validate = async ( req, res, next) => {
                 condition_value: rule.condition_value
             }
         }
-    })
+    }
+
+    return result ? req.respond.ok(response) : req.respond.badRequest(response)
 
 }
 
